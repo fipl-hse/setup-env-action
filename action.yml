@@ -1,16 +1,18 @@
 name: 'Setup environment'
 description: 'Setup environment for HSE FIPL courses'
-shell: bash
+
 runs:
   using: "composite"
   steps:
     - name: Set up Python 3.10
+      shell: bash
       uses: actions/setup-python@v4
       with:
         python-version: '3.10'
     - name: Cache pip
       uses: actions/cache@v3
       id: cache
+      shell: bash
       with:
         path: |
           ./venv/
@@ -20,5 +22,6 @@ runs:
           ${{ runner.os }}-venv-
     - name: Install dependencies
       if: steps.cache.outputs.cache-hit != 'true'
+      shell: bash
       run: |
         bash config/venv_setup.sh
