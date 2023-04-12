@@ -8,7 +8,7 @@ runs:
       uses: actions/setup-python@v4
       with:
         python-version: '3.10'
-        cache: 'pip'
+        cache: 'pipenv'
     - name: Install dependencies
       shell: bash
       run: |
