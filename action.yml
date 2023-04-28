@@ -15,7 +15,6 @@ runs:
           ./venv/
           ~/.local/bin/mystem
         key: ${{ env.GITHUB_REPOSITORY }}-${{ env.BRANCH_NAME }}-pip-${{ hashFiles('**/requirements*.txt') }}
-        ttl: 1814400
     - name: Install dependencies
       if: steps.cache.outputs.cache-hit != 'true'
       shell: bash
