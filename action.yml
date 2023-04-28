@@ -1,6 +1,5 @@
 name: 'Setup environment'
 description: 'Setup environment for HSE FIPL courses'
-
 runs:
   using: "composite"
   steps:
@@ -8,8 +7,17 @@ runs:
       uses: actions/setup-python@v4
       with:
         python-version: '3.10'
-        cache: 'pipenv'
+    - name: Cache pip
+      uses: actions/cache@v3
+      id: cache
+      with:
+        path: |
+          ./venv/
+          ~/.local/bin/mystem
+        key: ${{ env.GITHUB_REPOSITORY }}-${{ env.BRANCH_NAME }}-pip-${{ hashFiles('**/requirements*.txt') }}
+        ttl: 1814400
     - name: Install dependencies
+      if: steps.cache.outputs.cache-hit != 'true'
       shell: bash
       run: |
         bash config/venv_setup.sh
