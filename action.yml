@@ -19,4 +19,4 @@ runs:
       if: steps.cache.outputs.cache-hit != 'true'
       shell: bash
       run: |
-        bash config/venv_setup.sh
+        bash admin_utils/venv_setup.sh
