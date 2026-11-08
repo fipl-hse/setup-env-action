@@ -19,4 +19,10 @@ runs:
       if: steps.cache.outputs.cache-hit != 'true'
       shell: bash
       run: |
-        bash admin_utils/venv_setup.sh
+        LOCAL_SCRIPT="${{ github.workspace }}/admin_utils/venv_setup.sh"
+        DEFAULT_SCRIPT="${{ github.action_path }}/venv_setup.sh"
+        if [ -f "$LOCAL_SCRIPT" ]; then
+          bash "$LOCAL_SCRIPT"
+        else
+          bash "$DEFAULT_SCRIPT"
+        fi
