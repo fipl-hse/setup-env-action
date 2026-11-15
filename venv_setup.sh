@@ -10,7 +10,12 @@ source venv/bin/activate
 export PYTHONPATH=$(pwd):$PYTHONPATH
 which python
 
-python -m pip install -r requirements.txt
-python -m pip install -r requirements_qa.txt
+if [ -f "requirements.txt" ]; then
+    python -m pip install -r requirements.txt
+fi
+
+if [ -f "requirements_qa.txt" ]; then
+    python -m pip install -r requirements_qa.txt
+fi
 
 export PYTHONPATH
